@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mapbox_blue"
+    tools:context="com.example.felipetorres.mapboxspike.MainActivity">
+
+    <TextureView
+        android:id="@+id/texture_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="9.642141"
+        mapbox:mapbox_cameraTargetLng="-75.907168"
+        mapbox:mapbox_styleUrl="mapbox://styles/carlosfelipetorres/cja1l8rtwahxg2smvg9ssn2k3"
+        mapbox:mapbox_cameraZoom="5" />
+
+
+</android.support.constraint.ConstraintLayout>

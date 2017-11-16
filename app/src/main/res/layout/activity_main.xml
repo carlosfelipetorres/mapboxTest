@@ -21,11 +21,12 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="9.642141"
         mapbox:mapbox_cameraTargetLng="-75.907168"
-        mapbox:mapbox_styleUrl="mapbox://styles/carlosfelipetorres/cja1l8rtwahxg2smvg9ssn2k3"
+        mapbox:mapbox_styleUrl="mapbox://styles/agerace-globant/cja02de7193b02suvy4gpbt2c"
         mapbox:mapbox_cameraZoom="2" />
 
     <Button
         android:id="@+id/button"
+        android:text="2da prueba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

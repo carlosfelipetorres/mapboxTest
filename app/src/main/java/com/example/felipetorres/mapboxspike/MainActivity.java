@@ -16,6 +16,9 @@ import android.widget.Button;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 
 import java.io.IOException;
 
@@ -32,10 +35,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, "pk.eyJ1IjoiY2FybG9zZmVsaXBldG9ycmVzIiwiYSI6ImNqYTFlZWdxdDk4dzMzM3M0aTR6dWg0NHkifQ.0VwtOZURToVK-F6SXAIbbA");
+        Mapbox.getInstance(this, "pk.eyJ1IjoiYWdlcmFjZS1nbG9iYW50IiwiYSI6ImNqOXlpbG00bTE0amczMmxnb2I0ZXdldDgifQ.easDK84eoiROS4TqgZUTSA");
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                mapboxMap.getLayers();
+            }
+        });
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {

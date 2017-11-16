@@ -44,7 +44,7 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
 
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, "pk.eyJ1IjoiY2FybG9zZmVsaXBldG9ycmVzIiwiYSI6ImNqYTFlZWdxdDk4dzMzM3M0aTR6dWg0NHkifQ.0VwtOZURToVK-F6SXAIbbA");
+        Mapbox.getInstance(this, "pk.eyJ1IjoiYWdlcmFjZS1nbG9iYW50IiwiYSI6ImNqOXlpbG00bTE0amczMmxnb2I0ZXdldDgifQ.easDK84eoiROS4TqgZUTSA");
 
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_adjust_layer_opacity);
@@ -82,11 +82,8 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
             public void onMapReady(MapboxMap mapboxMap) {
                 map = mapboxMap;
 
-                RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://styles/carlosfelipetorres/cja1l8rtwahxg2smvg9ssn2k3");
-                map.addSource(chicagoSource);
-
-                RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
-                map.addLayer(chicagoLayer);
+                RasterLayer chicagoSource = new RasterLayer("chicago-source", "mapbox://styles/agerace-globant/cja02de7193b02suvy4gpbt2c");
+                map.addLayer(chicagoSource);
 
                 chicago = map.getLayer("chicago");
 

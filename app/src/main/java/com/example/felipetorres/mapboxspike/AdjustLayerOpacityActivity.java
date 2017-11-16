@@ -1,47 +1,98 @@
 package com.example.felipetorres.mapboxspike;
 
-import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.RasterLayer;
+import com.mapbox.mapboxsdk.style.sources.RasterSource;
 
 import java.io.IOException;
 
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
+
+/**
+ * Use a seekbar to adjust the opacity of a raster layer on top of a map.
+ */
+public class AdjustLayerOpacityActivity extends AppCompatActivity {
 
     private MapView mapView;
+    private MapboxMap map;
+    private Layer chicago;
     private MediaPlayer mediaPlayer;
     private TextureView textureView;
-    private MapboxMap mapboxMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, "pk.eyJ1IjoiY2FybG9zZmVsaXBldG9ycmVzIiwiYSI6ImNqYTFlZWdxdDk4dzMzM3M0aTR6dWg0NHkifQ.0VwtOZURToVK-F6SXAIbbA");
-        setContentView(R.layout.activity_main);
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
 
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(v -> {
-           Intent i = new Intent(this, AdjustLayerOpacityActivity.class);
-           startActivity(i);
+        // Mapbox access token is configured here. This needs to be called either in your application
+        // object or in the same activity which contains the mapview.
+        Mapbox.getInstance(this, "pk.eyJ1IjoiY2FybG9zZmVsaXBldG9ycmVzIiwiYSI6ImNqYTFlZWdxdDk4dzMzM3M0aTR6dWg0NHkifQ.0VwtOZURToVK-F6SXAIbbA");
+
+        // This contains the MapView in XML and needs to be called after the access token is configured.
+        setContentView(R.layout.activity_adjust_layer_opacity);
+
+        final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);
+        final TextView percentTextView = (TextView) findViewById(R.id.textview_opacity_value);
+
+        opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (chicago != null) {
+                    chicago.setProperties(
+                            rasterOpacity((float) progress / 100)
+                    );
+                }
+                String progressPrecentage = progress + "%";
+                percentTextView.setText(progressPrecentage);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
+
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                map = mapboxMap;
+
+                RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://styles/carlosfelipetorres/cja1l8rtwahxg2smvg9ssn2k3");
+                map.addSource(chicagoSource);
+
+                RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
+                map.addLayer(chicagoLayer);
+
+                chicago = map.getLayer("chicago");
+
+            }
+        });
+
         textureView = findViewById(R.id.texture_view);
         try {
             mediaPlayer = new MediaPlayer();
@@ -75,13 +126,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Timber.e(e);
         }
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mapView.onStart();
     }
 
     @Override
@@ -91,15 +135,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 
     @Override
@@ -119,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
-
 
     public static void playLoopedVideo(@NonNull SurfaceTexture surfaceTexture, @NonNull MediaPlayer mediaPlayer) {
         Surface surface = new Surface(surfaceTexture);
@@ -154,5 +203,4 @@ public class MainActivity extends AppCompatActivity {
         }
         textureView.setLayoutParams(layoutParams);
     }
-
 }

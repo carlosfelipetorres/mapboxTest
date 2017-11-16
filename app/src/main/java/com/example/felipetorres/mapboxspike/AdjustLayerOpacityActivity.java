@@ -75,19 +75,19 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
             }
         });
 
-        mapView = (MapView) findViewById(R.id.mapView);
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                map = mapboxMap;
+        mapView.getMapAsync(mapboxMap -> {
+            map = mapboxMap;
 
-                RasterLayer chicagoSource = new RasterLayer("chicago-source", "mapbox://styles/agerace-globant/cja02de7193b02suvy4gpbt2c");
-                map.addLayer(chicagoSource);
+            RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor");
+            map.addSource(chicagoSource);
 
-                chicago = map.getLayer("chicago");
+            RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
+            map.addLayer(chicagoLayer);
 
-            }
+            chicago = map.getLayer("chicago");
+
         });
 
         textureView = findViewById(R.id.texture_view);

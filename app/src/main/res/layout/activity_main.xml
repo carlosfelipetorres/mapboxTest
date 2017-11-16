@@ -14,15 +14,29 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:background="@color/transparent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="9.642141"
-        mapbox:mapbox_cameraTargetLng="-75.907168"
-        mapbox:mapbox_styleUrl="mapbox://styles/agerace-globant/cja02de7193b02suvy4gpbt2c"
-        mapbox:mapbox_cameraZoom="2" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            mapbox:mapbox_cameraTargetLat="9.642141"
+            mapbox:mapbox_cameraTargetLng="-75.907168"
+            mapbox:mapbox_styleUrl="mapbox://styles/agerace-globant/cja02de7193b02suvy4gpbt2c"
+            mapbox:mapbox_cameraZoom="2" />
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            mapbox:mapbox_cameraTargetLat="9.642141"
+            mapbox:mapbox_cameraTargetLng="-75.907168"
+            mapbox:mapbox_styleUrl="mapbox://styles/agerace-globant/cja01ar2t92us2splwxn4tn33  "
+            mapbox:mapbox_cameraZoom="2" />
+
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/button"

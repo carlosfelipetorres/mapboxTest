@@ -27,6 +27,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     private MapView mapView;
+    private MapView mapView2;
     private MediaPlayer mediaPlayer;
     private TextureView textureView;
     private MapboxMap mapboxMap;
@@ -40,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                mapboxMap.getLayers();
+            }
+        });
+
+        mapView2 = findViewById(R.id.mapView2);
+        mapView2.onCreate(savedInstanceState);
+        mapView2.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
                 mapboxMap.getLayers();
@@ -91,42 +101,49 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         mapView.onStart();
+        mapView2.onStart();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        mapView2.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        mapView2.onPause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mapView.onStop();
+        mapView2.onStop();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+        mapView2.onLowMemory();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        mapView2.onDestroy();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+        mapView2.onSaveInstanceState(outState);
     }
 
 

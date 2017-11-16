@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mapbox_blue"
+    android:background="@color/transparent"
+    android:backgroundTint="@color/transparent"
     tools:context="com.example.felipetorres.mapboxspike.MainActivity">
 
     <TextureView
@@ -16,12 +17,14 @@
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
+        android:background="@color/transparent"
+        android:backgroundTint="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="9.642141"
         mapbox:mapbox_cameraTargetLng="-75.907168"
         mapbox:mapbox_styleUrl="mapbox://styles/carlosfelipetorres/cja1l8rtwahxg2smvg9ssn2k3"
-        mapbox:mapbox_cameraZoom="5" />
+        mapbox:mapbox_cameraZoom="2" />
 
 
 </android.support.constraint.ConstraintLayout>

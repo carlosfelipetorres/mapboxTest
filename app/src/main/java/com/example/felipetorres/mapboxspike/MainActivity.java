@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+        mapView.setDrawingCacheBackgroundColor(getResources().getColor(R.color.transparent));
 
         textureView = findViewById(R.id.texture_view);
         try {

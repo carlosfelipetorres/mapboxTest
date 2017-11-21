@@ -1,5 +1,6 @@
 package com.example.felipetorres.mapboxspike;
 
+import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
@@ -23,14 +24,12 @@ import com.mapbox.mapboxsdk.style.sources.RasterSource;
 
 import java.io.IOException;
 
-import timber.log.Timber;
-
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
 
 /**
  * Use a seekbar to adjust the opacity of a raster layer on top of a map.
  */
-public class AdjustLayerOpacityActivity extends AppCompatActivity {
+public class AdjustLayerOpacityActivity extends Activity {
 
     private MapView mapView;
     private MapboxMap map;
@@ -121,7 +120,7 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
                         }
                     }));
         } catch (IOException e) {
-            Timber.e(e);
+
         }
     }
 

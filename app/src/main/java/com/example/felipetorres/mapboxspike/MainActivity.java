@@ -1,5 +1,6 @@
 package com.example.felipetorres.mapboxspike;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.SurfaceTexture;
@@ -18,16 +19,16 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.PropertyValue;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 
 import java.io.IOException;
 
-import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private MapView mapView;
-    private MapView mapView2;
+    //private MapView mapView2;
     private MediaPlayer mediaPlayer;
     private TextureView textureView;
     private MapboxMap mapboxMap;
@@ -47,19 +48,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mapView2 = findViewById(R.id.mapView2);
-        mapView2.onCreate(savedInstanceState);
-        mapView2.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.getLayers();
-            }
-        });
+        //mapView2 = findViewById(R.id.mapView2);
+        //mapView2.onCreate(savedInstanceState);
+        //mapView2.getMapAsync(new OnMapReadyCallback() {
+        //    @Override
+        //    public void onMapReady(MapboxMap mapboxMap) {
+         //       mapboxMap.getLayers();
+         //   }
+        //});
 
         Button button = findViewById(R.id.button);
         button.setOnClickListener(v -> {
            Intent i = new Intent(this, AdjustLayerOpacityActivity.class);
            startActivity(i);
+        });
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(v -> {
+            Intent i = new Intent(this, OfflineManagerActivity.class);
+            startActivity(i);
         });
         textureView = findViewById(R.id.texture_view);
         try {
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }));
         } catch (IOException e) {
-            Timber.e(e);
+
         }
 
     }
@@ -101,49 +107,49 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         mapView.onStart();
-        mapView2.onStart();
+       // mapView2.onStart();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
-        mapView2.onResume();
+       // mapView2.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mapView.onPause();
-        mapView2.onPause();
+       // mapView2.onPause();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mapView.onStop();
-        mapView2.onStop();
+        //mapView2.onStop();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
-        mapView2.onLowMemory();
+       // mapView2.onLowMemory();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
-        mapView2.onDestroy();
+        //mapView2.onDestroy();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
-        mapView2.onSaveInstanceState(outState);
+        //mapView2.onSaveInstanceState(outState);
     }
 
 

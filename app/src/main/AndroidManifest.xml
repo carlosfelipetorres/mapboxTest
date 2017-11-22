@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".AdjustLayerOpacityActivity"/>
         <activity android:name=".OfflineManagerActivity"/>
+        <activity android:name=".SimpleOfflineMapActivity"/>
     </application>
 
 </manifest>

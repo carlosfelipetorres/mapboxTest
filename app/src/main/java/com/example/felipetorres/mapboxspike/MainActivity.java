@@ -67,6 +67,11 @@ public class MainActivity extends Activity {
             Intent i = new Intent(this, OfflineManagerActivity.class);
             startActivity(i);
         });
+        Button button3 = findViewById(R.id.button3);
+        button3.setOnClickListener(v -> {
+            Intent i = new Intent(this, SimpleOfflineMapActivity.class);
+            startActivity(i);
+        });
         textureView = findViewById(R.id.texture_view);
         try {
             mediaPlayer = new MediaPlayer();

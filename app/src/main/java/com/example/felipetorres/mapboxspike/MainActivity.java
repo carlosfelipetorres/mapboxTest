@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        //Try to add to maps overlayed with transparency
         //mapView2 = findViewById(R.id.mapView2);
         //mapView2.onCreate(savedInstanceState);
         //mapView2.getMapAsync(new OnMapReadyCallback() {
